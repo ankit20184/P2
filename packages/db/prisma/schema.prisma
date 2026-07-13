@@ -8,21 +8,47 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  number   String @unique
+  id String @id @default(cuid())
+  name String
+  email String @unique
   password String
+  createdAt DateTime @default(now())
 }
-
-model Merchant {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+model Customer {
+  id        String   @id @default(cuid())
   name      String
-  auth_type AuthType
+  email     String   @unique
+  city      String?
+  country   String?
+  createdAt DateTime @default(now())
+  orders    Order[]
 }
 
-enum AuthType {
-  Google
-  Github
+model Product {
+  id        String   @id @default(cuid())
+  name      String
+  category  String
+  price     Float
+  createdAt DateTime @default(now())
+  items     OrderItem[]
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  customerId  String
+  customer    Customer @relation(fields:[customerId], references:[id])
+  createdAt   DateTime @default(now())
+  status      String
+  total       Float
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id         String  @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int
+  price      Float
+  order      Order   @relation(fields:[orderId], references:[id])
+  product    Product @relation(fields:[productId], references:[id])
 }
