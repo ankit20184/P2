@@ -1,21 +1,34 @@
-import { AgentState } from "../state";
+import { llm } from "../lib/llm";
 
-export async function sqlGeneratorAgent(
-  state: typeof AgentState.State
-): Promise<Partial<typeof AgentState.State>> {
+export async function sqlGeneratorAgent(state: any) {
+  const prompt = `
+   You are an expert PostgreSQL engineer.
 
+   Database Schema:
+   ${JSON.stringify(state.schema, null, 2)}
+
+  Question:
+   ${state.question}
+   
+   Rules:
+
+   - Only generate PostgreSQL SQL.
+   - Never explain.
+   - Never add markdown.
+   - Use ONLY tables and columns from the schema.
+   - Use quoted identifiers for camelCase columns.
+   - Return only SQL.
+   
+
+
+
+   
+
+   `;
+
+  const response = await llm.invoke(prompt);
+  console.log(response);
   return {
-    ...state,
-
-    sql: `
-SELECT
-p.name,
-SUM(oi.quantity) AS total
-FROM "OrderItem" oi
-JOIN "Product" p
-ON p.id=oi."productId"
-GROUP BY p.name
-ORDER BY total DESC;
-`
+    sql: response.content.toString().trim(),
   };
 }

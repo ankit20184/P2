@@ -1,6 +1,6 @@
 import { Annotation } from "@langchain/langgraph";
 
-export const AgentState = Annotation.Root( {
+export const AgentState = Annotation.Root({
   question: Annotation<string>({
     reducer: (a, b) => b ?? a,
     default: () => "",
@@ -34,5 +34,13 @@ export const AgentState = Annotation.Root( {
   explanation: Annotation<string>({
     reducer: (a, b) => b ?? a,
     default: () => "",
+  }),
+  schema: Annotation<any[]>({
+    reducer: (a, b) => b ?? a,
+    default: () => [],
+  }),
+  chart: Annotation<any>({
+    reducer: (a, b) => b ?? a,
+    default: () => null,
   }),
 });

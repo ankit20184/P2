@@ -1,30 +1,18 @@
 import express from "express";
 import aiRoutes from "./routes/ai.routes";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const app = express();
 
-
 app.use(express.json());
 
+app.use("/api/ai", aiRoutes);
+export { aiService } from "./services/ai.services";
 
-app.use(
- "/api/ai",
- aiRoutes
-);
-export {
-    aiService
-   } from "./services/ai.services";
-   
-   
-   export {
-    workflow
-   } from "./graph";
+export { workflow } from "./graph";
 
-app.listen(3001,()=>{
-
- console.log(
- "API running on 3001"
- );
-
+app.listen(3001, () => {
+  console.log("API running on 3001");
 });

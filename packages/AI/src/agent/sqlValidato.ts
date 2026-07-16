@@ -1,28 +1,29 @@
-import { AgentState } from "../state";
+export async function sqlValidatorAgent(state: any) {
+  const sql = state.sql.trim();
 
-const blocked = [
-  "DELETE",
-  "DROP",
-  "UPDATE",
-  "INSERT",
-  "ALTER",
-  "TRUNCATE"
-];
+  const forbidden = [
+    "DROP",
+    "DELETE",
+    "UPDATE",
+    "INSERT",
+    "ALTER",
+    "TRUNCATE",
+    "CREATE",
+  ];
 
-export async function sqlValidatorAgent(
-  state:typeof AgentState.State
-): Promise<Partial<typeof AgentState.State>> {
+  const upper = sql.toUpperCase();
 
-  const sql = state.sql?.toUpperCase() ?? "";
+  for (const word of forbidden) {
+    if (upper.includes(word)) {
+      throw new Error(`Forbidden SQL detected: ${word}`);
+    }
+  }
 
-  const valid =
-    !blocked.some(word =>
-      sql.includes(word)
-    );
+  if (!upper.startsWith("SELECT")) {
+    throw new Error("Only SELECT queries are allowed.");
+  }
 
   return {
-    ...state,
-
-    sqlValid: valid
+    sqlValid: true,
   };
 }
