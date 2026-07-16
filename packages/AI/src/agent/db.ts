@@ -1,4 +1,3 @@
-import { any } from "zod/v4";
 import { prisma } from "../../../db/src/index";
 import { AgentState } from "../state";
 
@@ -12,14 +11,20 @@ export async function executeSQLAgent(
   }
   console.log("EXECUTING SQL:");
   console.log(state.sql);
-  const rows = await prisma.$queryRawUnsafe(state.sql);
+  // const rows = await prisma.$queryRawUnsafe(state.sql);
   console.log("Database Result:");
+  const rows = normalizeSQLResult(await prisma.$queryRawUnsafe(state.sql));
   console.log(rows);
+  const columns = rows.length ? Object.keys(rows[0]) : [];
 
   return {
     ...state,
 
     rows: normalizeSQLResult(rows),
+    metadata: {
+      rowCount: rows.length,
+      columns,
+    },
   };
 }
 function normalizeSQLResult(rows: any[]) {

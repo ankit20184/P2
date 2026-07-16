@@ -18,12 +18,6 @@ export async function sqlGeneratorAgent(state: any) {
    - Use ONLY tables and columns from the schema.
    - Use quoted identifiers for camelCase columns.
    - Return only SQL.
-   
-
-
-
-   
-
    `;
 
   const response = await llm.invoke(prompt);

@@ -1,15 +1,7 @@
 export async function sqlValidatorAgent(state: any) {
   const sql = state.sql.trim();
 
-  const forbidden = [
-    "DROP",
-    "DELETE",
-    "UPDATE",
-    "INSERT",
-    "ALTER",
-    "TRUNCATE",
-    "CREATE",
-  ];
+  const forbidden = ["DROP", "DELETE", "UPDATE", "INSERT", "ALTER", "TRUNCATE"];
 
   const upper = sql.toUpperCase();
 

@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import dotenv from "dotenv";
+dotenv.config();
 import { workflow } from "@repo/ai";
 
 export async function aiController(req: Request, res: Response) {

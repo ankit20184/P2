@@ -43,4 +43,18 @@ export const AgentState = Annotation.Root({
     reducer: (a, b) => b ?? a,
     default: () => null,
   }),
+  metadata: Annotation<{
+    rowCount: number;
+    columns: string[];
+  }>({
+    reducer: (_, b) => b,
+    default: () => ({
+      rowCount: 0,
+      columns: [],
+    }),
+  }),
+  columns: Annotation<string[]>({
+    reducer: (a, b) => b ?? a,
+    default: () => [],
+  }),
 });
