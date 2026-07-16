@@ -1,6 +1,6 @@
 import express from "express";
 
-import aiRoutes from "./routes/ai.routes";
+import aiRoutes from "./routes/ai.routes.js";
 
 const app = express();
 
@@ -8,9 +8,6 @@ app.use(express.json());
 
 app.use("/api/ai", aiRoutes);
 
-app.listen(3001, () => {
-  console.log("API running on 3001");
-});
-export { aiService } from "./services/ai.services";
+export { aiService } from "./services/ai.services.js";
 
-export { workflow } from "./graph";
+export { workflow } from "./graph/index.js";

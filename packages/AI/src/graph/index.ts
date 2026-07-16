@@ -1,11 +1,11 @@
-import { AgentState } from "../state";
-import { plannerAgent } from "../agent/planner";
-import { sqlGeneratorAgent } from "../agent/sql-generator";
-import { sqlValidatorAgent } from "../agent/sqlValidato";
-import { executeSQLAgent } from "../agent/db";
-import { chartAgent } from "../agent/chart";
-import { insightAgent } from "../agent/insight";
-import { schemaAgent } from "../agent/schema";
+import { AgentState } from "../state.js";
+import { plannerAgent } from "../agent/planner.js";
+import { sqlGeneratorAgent } from "../agent/sql-generator.js";
+import { sqlValidatorAgent } from "../agent/sqlValidato.js";
+import { executeSQLAgent } from "../agent/db.js";
+import { chartAgent } from "../agent/chart.js";
+import { insightAgent } from "../agent/insight.js";
+import { schemaAgent } from "../agent/schema.js";
 import { StateGraph, START, END } from "@langchain/langgraph";
 
 const graph = new StateGraph(AgentState)

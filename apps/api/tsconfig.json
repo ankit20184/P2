@@ -11,8 +11,9 @@
     "esModuleInterop": true,
 
     "skipLibCheck": true,
-
-    "types": ["node"]
+    "rootDir": "src",
+    "types": ["node"],
+    "outDir": "dist"
   },
 
   "include": ["src"]

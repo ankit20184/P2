@@ -1,4 +1,4 @@
-import { llm } from "../lib/llm";
+import { llm } from "../lib/llm.js";
 
 export async function sqlGeneratorAgent(state: any) {
   const prompt = `

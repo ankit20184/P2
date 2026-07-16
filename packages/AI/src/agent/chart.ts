@@ -44,7 +44,7 @@
 //     chart: JSON.parse(response.content.toString()),
 //   };
 // }
-import { llm } from "../lib/llm";
+import { llm } from "../lib/llm.js";
 
 export async function chartAgent(state: any) {
   const rows = state.rows ?? [];

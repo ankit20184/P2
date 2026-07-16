@@ -1,5 +1,5 @@
-import { prisma } from "../../../db/src/index";
-import { AgentState } from "../state";
+import { prisma } from "@repo/db";
+import { AgentState } from "../state.js";
 
 export async function executeSQLAgent(
   state: typeof AgentState.State,

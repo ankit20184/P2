@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { aiService } from "../services/ai.services";
+import { aiService } from "../services/ai.services.js";
 
 export async function askAI(req: Request, res: Response) {
   try {
